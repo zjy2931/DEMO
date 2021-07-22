@@ -17,7 +17,7 @@ export const store = createStore<State>({
   },
   mutations: {
     increment(state) {
-      console.log(state,"=============")
+      console.log(state,'store')
       state.count++
     }
   }
