@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "cui-platform-qrcodejs2": "^1.0.0",
+    "html2canvas": "^1.1.4",
+    "qrcodejs2": "0.0.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
