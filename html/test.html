@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            align-items: center;
+            align-self: center;
+            justify-content: center;
+            border: 1px solid #ccc
+        }
+
+        nav a {
+            display: inline-block;
+            flex: 1;
+            font-size: 18px;
+            text-align: center;
+            display: none;
+        }
+
+        section.scroll-container {
+            display: block;
+            /* content: '\undefined'; */
+            width: 100%;
+            height: 400px;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+        }
+
+        div.scroll-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 20px;
+            color: #fff
+        }
+
+        div#page-1 {
+            background: saddlebrown;
+        }
+
+        div#page-2 {
+            background: salmon;
+        }
+
+        div#page-3 {
+            background: seagreen;
+
+
+        }
+    </style>
+
+<body>
+    <div id="app">
+        <nav>
+            <button>click</button>
+        </nav>
+        <section class="scroll-container">
+            <div class="scroll-page" id="page-1">1</div>
+            <div class="scroll-page" id="page-2">2</div>
+            <div class="scroll-page" id="page-3">3</div>
+        </section>
+
+    </div>
+</body>
+<script>
+    let str = 'aaaabbbbbbcccccccccbbbbbbbbcccddfgh';
+    function getMaxWords(str) {
+        const list = new Set(str.split(''));
+        let Maxword = list[0]
+        for(word of list){
+            if(str.split(word).length>str.split(Maxword).length){
+                Maxword = word
+            }
+        }
+        return Maxword
+    }
+    console.log(getMaxWords(str))
+</script>
+
+</html>
