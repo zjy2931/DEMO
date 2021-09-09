@@ -87,8 +87,8 @@
     function getMaxWords(str) {
         const list = new Set(str.split(''));
         let Maxword = list[0]
-        for(word of list){
-            if(str.split(word).length>str.split(Maxword).length){
+        for (word of list) {
+            if (str.split(word).length > str.split(Maxword).length) {
                 Maxword = word
             }
         }
