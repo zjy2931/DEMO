@@ -5,79 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="./js/test.js"></script>
     <title>Document</title>
     <style>
-        body{
-            height: 300vh;
+        .text {
+            width: 100%;
+        }
+
+        .tips {
+            color: red;
         }
     </style>
 </head>
 
 <body>
-    <my-component></my-component>
+    <textarea rows="25" class="text" placeholder="输入下单参数">
+        {
+            "bizNo": "BT13344159351966148632",
+            "goodsInfo": "善育儿",
+            "tradeAmount": 1,
+            "memberId": "1601187720000213212",
+            "mchAppId": "wxe6ef0f974593b718",
+            "payMethod": "WJS",
+            "requestId": "1013467007045765",
+            "clientIp": "14.23.150.211",
+            "os": "Android",
+            "returnUrl": "",
+            "notifyTopic":"wm-class-pay-notify",
+            "domain":"http://test-parenting-api.shanyuer.com/",
+            "wxOpenId": "oTAUPt7arN-rZkS8soBO8P4xNEVM",
+            "company": "6",
+            "appid":"144"
+        }
+    </textarea>
+    <div class="tips"></div>
+    <button id="btn">下单</button>
 </body>
-<script type="module">
-
-</script>
-<script type="module">
-    import {
-        defineComponent,
-        reactive,
-        html,
-        onMounted,
-        onUpdated,
-        onUnmounted
-    } from 'https://unpkg.com/@vue/lit'
-    import scrollTo from './test.js'
-    
-
-
-    defineComponent('my-component', () => {
-        const state = reactive({
-            text: 'hello',
-            show: true
-        })
-        const toggle = () => {
-            state.show = !state.show
-        }
-        const onInput = e => {
-            state.text = e.target.value
-        }
-
-        return () => html`
-      <button @click=${toggle}>toggle child</button>
-      <p>
-      ${state.text} <input value=${state.text} @input=${onInput}>
-      </p>
-      ${state.show ? html`<my-child msg=${state.text}></my-child>` : ``}
-    `
-    })
-
-    defineComponent('my-child', ['msg'], (props) => {
-        const state = reactive({ count: 0 })
-        const increase = () => {
-            state.count++
-        }
-
-        onMounted(() => {
-            console.log('child mounted')
-        })
-
-        onUpdated(() => {
-            console.log('child updated')
-        })
-
-        onUnmounted(() => {
-            scrollTo(800)
-            console.log('child unmounted')
-        })
-
-        return () => html`
-      <p>${props.msg}</p>
-      <p>${state.count}</p>
-      <button @click=${increase}>increase</button>
-    `
-    })
+<script>
+    axios.defaults.headers.post['h-app-id'] = '144'
+    document.querySelector('#btn').onclick = function () {
+        const textE = document.querySelector('.text').value
+        const {appid,...params} = JSON.parse(textE)
+        axios.post('/api/pay/cashier/createTradeOrder', params,{headers:{'h-app-id':appid}})
+            .then(function (response) {
+                console.log(response)
+                const { code, desc, data } = response.data
+                if (code !== 0) {
+                    document.querySelector('.tips').innerHTML = desc
+                    return
+                }
+                const form = data.formData
+                document.write(form)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    console.log(axios)
 </script>
 
 </html>

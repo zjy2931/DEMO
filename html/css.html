@@ -5,20 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/typeit@8.0.3/dist/index.umd.js"></script>
     <title>Document</title>
     <style>
         body {
             --icon-width: 20px;
         }
-        p{
+
+        p {
             text-decoration: line-through underline;
         }
+
         .icon {
             display: inline-block;
             width: var(--icon-width);
             height: var(--icon-width);
             position: relative;
         }
+
+        .place {
+            color: gold;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
         .icon ::after {
             display: inline-block;
             width: var(--icon-width);
@@ -35,6 +45,33 @@
 <body>
     <p><strong>原始图标</strong></p>
     <i class="icon icon-del"></i>
+    <div id="content"></div>
 </body>
+<script>
+    new TypeIt("#content", {
+        strings: "This is my string!",
+        speed: 75,
+        loop: false,
+    })
+        .move(-8, { delay: 1000 })
+        .type('s', { delay: 400 })
+        .delete(1)
+        .move(2, { instant: true })
+        .type(' on the <span class="place">近期发布了一篇帖子，采用SVG点击展开的特效，在文章开始，放置了很小一张图，点击后触发完整的很长的长图文，阅读人数2万+，月度完成率达到了99%以上，而往期的帖子从未超过70%，感觉上采用这种形式，造成了不够精准的阅读完成率统计，含有很大水分。不知我的判断是否准确，在统计上，是否有办法改进算法，做出更加精准的统计结果。 <br/></span>', { delay: 1400 })
+        .go();
+
+
+    $(async function () {
+        const  inputs = $('.el-input__inner')[2]
+        const btn = $('.el-button--primary')[0]
+        var code = await cookieStore.get('verification_code')
+        inputs.value = code.value
+        const event = new Event('input')
+        inputs.dispatchEvent(event)
+        setTimeout(()=>{
+            btn.click()
+        },0)
+    })
+</script>
 
 </html>

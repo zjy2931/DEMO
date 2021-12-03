@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>// 设置html字号
+    ; (function () {
+      // var dpr = window.devicePixelRatio || 1
+      // var scale = 1 / dpr
+      var scale = 1
+      var metaEl = document.createElement('meta')
+      metaEl.setAttribute('name', 'viewport')
+      metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no')
+      document.querySelector('head').appendChild(metaEl)
+      function setRootFZ() {
+        var clientWidth = document.documentElement.clientWidth
+        var maxWidth = 768
+        if (clientWidth > maxWidth) {
+          clientWidth = maxWidth
+        }
+        var rem = clientWidth / 10
+        document.documentElement.style.maxWidth = maxWidth + 'px'
+        document.documentElement.style.fontSize = rem + 'px'
+      }
+      setRootFZ()
+      window.addEventListener('resize', setRootFZ)
+    })()
+      //禁止微信内置浏览器调整字体大小
+      ; (function () {
+        if (typeof WeixinJSBridge == 'object' && typeof WeixinJSBridge.invoke == 'function') {
+          handleFontSize()
+        } else {
+          if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', handleFontSize, false)
+          } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', handleFontSize)
+            document.attachEvent('onWeixinJSBridgeReady', handleFontSize)
+          }
+        }
+        function handleFontSize() {
+          // 设置网页字体为默认大小
+          WeixinJSBridge.invoke('setFontSizeCallback', {
+            fontSize: 0
+          })
+          // 重写设置网页字体大小的事件
+          WeixinJSBridge.on('menu:setfont', function () {
+            WeixinJSBridge.invoke('setFontSizeCallback', {
+              fontSize: 0
+            })
+          })
+        }
+      })()
+      //禁止ios双击放大
+      ; (function () {
+        let lastTouchEnd = 0
+        document.addEventListener('touchend', function (event) {
+          var now = (new Date()).getTime()
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault()
+          }
+          lastTouchEnd = now
+        }, false)
+      })()</script>
+  <script>//搜狐回传
+        (function (root) {
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.async = true;
+          script.src = '//fdf24fb6ce298.cdn.sohucs.com/track-report/adTackRport.js';
+          script.onerror = function () { }
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(script, s);
+        })(window);</script>
+  <link
+    href="//wm-front-common.weimiaocaishang.com/wm-front-landing-page-mobile-custom/customer/css/chunk-vendors.2996731f.css"
+    rel="stylesheet">
+  <link href="//wm-front-common.weimiaocaishang.com/wm-front-landing-page-mobile-custom/customer/css/app.d2acd66b.css"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="//wm-front-common.weimiaocaishang.com/common/js/jweixin-1.6.0.js"></script>
+  <script
+    src="//wm-front-common.weimiaocaishang.com/wm-front-landing-page-mobile-custom/customer/js/chunk-vendors.7d1ca669.js"></script>
+  <script
+    src="//wm-front-common.weimiaocaishang.com/wm-front-landing-page-mobile-custom/customer/js/app.20da51ea.js"></script>
+</body>
+
+</html>

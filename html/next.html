@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://animejs.com/lib/anime.min.js"></script>
+    <script src="./js/mo.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .box {
+            width: 100px;
+            background: palegoldenrod;
+            height: 50px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .center {
+            width: 600px;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ball" id="bouncyCircle"></div>
+    <div class="test">23232324235</div>
+    <div class="box">
+        <div class="center">
+            著有《财务自由工具操作技能课》、《财务自由财报分析技能课》、《财务自由企业分析技能课
+        </div>
+    </div>
+</body>
+<script >
+    alert(1)
+    // document.body.innerHTML = str
+    // const bouncyCircle = new mojs.Shape({
+    //     parent: '#bouncyCircle',
+    //     shape: 'circle',
+    //     fill: { '#F64040': '#FC46AD' },
+    //     radius: { 20: 80 },
+    //     duration: 2000,
+    //     isYoyo: true,
+    //     isShowStart: true,
+    //     easing: 'elastic.inout',
+    //     repeat: 1,
+    // });
+
+    // bouncyCircle.play()
+    let derection = false
+    var myObject = {
+        prop1: 0,
+        prop2: '0%'
+    }
+    document.querySelector('.box').onclick = e => {
+        console.log(derection)
+        anime({
+            targets: myObject,
+            prop1: 50,
+            prop2: '100%',
+            easing: 'linear',
+            round: 1,
+            update: function () {
+                document.querySelector('.box').innerHTML = str;
+            }
+        });
+        if (!derection) {
+            anime({
+                targets: ['.box', myObject],
+                prop1: 50,
+                prop2: '100%',
+                width: '600px', // -> from '28px' to '100%',
+                easing: 'easeInOutQuad',
+            });
+            derection = true
+        } else {
+            console.log("反向")
+            anime({
+                targets: ['.box', myObject],
+                prop1: 0,
+                prop2: '0%',
+                width: '100px', // -> from '28px' to '100%',
+                easing: 'easeInOutQuad',
+            });
+            derection = false
+        }
+
+    }
+</script>
+
+</html>

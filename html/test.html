@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="./js/001.js"></script>
     <style>
         #app {
             width: 100%;
@@ -67,19 +68,29 @@
 
 
         }
+
+        .item {
+            height: 100px;
+            content: "文字";
+            border: 1px solid lightblue;
+        }
+        .item img{
+            width: 100%;
+        }
     </style>
 
 <body>
     <div id="app">
-        <nav>
-            <button>click</button>
-        </nav>
-        <section class="scroll-container">
-            <div class="scroll-page" id="page-1">1</div>
-            <div class="scroll-page" id="page-2">2</div>
-            <div class="scroll-page" id="page-3">3</div>
-        </section>
-
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
     </div>
 </body>
 <script>
@@ -95,6 +106,44 @@
         return Maxword
     }
     console.log(getMaxWords(str))
+    var target = document.getElementById('app')
+    target.ondragenter = handle_enter
+    target.ondragover = handle_over
+    target.ondragleave = handle_leave
+
+    target.ondrop = handle_drop
+
+    function handle_enter(e) {
+        console.log('handle_enter-当元素进入目的地时触发')
+        // 阻止浏览器默认行为
+        e.preventDefault()
+    }
+
+    function handle_over(e) {
+        console.log('handle_over-当元素在目的地时触发')
+        console.log(e)
+        e.target.style = 'border:1px solid red'
+        // 阻止浏览器默认行为
+        e.preventDefault()
+    }
+
+    function handle_leave(e) {
+        console.log('handle_leave-当元素离开目的地时触发')
+        e.target.style = 'border:1px solid none'
+        // 阻止浏览器默认行为
+        // e.preventDefault()
+    }
+
+    function handle_drop(e) {
+        console.log('handle_drop-当元素在目的地放下时触发', e)
+        e.target.style = 'border:1px solid none'
+        let returnObj = e.dataTransfer.getData('Text')
+        const div = document.createElement('div')
+        div.innerHTML = returnObj
+        div.className = 'item'
+        e.target.parentNode.insertBefore(div, e.target.nextElementSibling);
+        e.preventDefault()
+    }
 </script>
 
 </html>

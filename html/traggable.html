@@ -23,8 +23,9 @@
         border: 1px solid gray;
     }
 
-    .target {
+    #target {
         width: 200px;
+        height: 900px;
         line-height: 200px;
         text-align: center;
         border: 1px solid gray;
@@ -42,20 +43,13 @@
             <div class="url" id="url">
                 <a href="http://weiqinl.com" target="_blank">我是url:http://weiqinl.com</a>
             </div>
-            <img class="img" id="tupian1" src="img1.png" alt="图片1" />
-            <img class="img" id="tupian2" src="img2.png" alt="图片2" />
+            <img class="img" id="tupian1" src="https://cdn.jsdelivr.net/gh/zjy2931/my-img@master/img/code.2626fnb06cjk.png" alt="图片1" />
+            <img class="img" id="tupian2" src="https://cdn.jsdelivr.net/gh/zjy2931/my-img@master/img/code.2626fnb06cjk.png" alt="图片2" />
         </div>
-        <div id='target' class="dropabled target">
-            <div class="item2">atests</div>
-            <div class="item2">atests</div>
-            <div class="item2">atests</div>
-            <div class="item2">atests</div>
-            <div class="item2">atests</div>
-            <div class="item2">atests</div>
-        </div>
+        <iframe id="target" src="./test.html"></iframe>
     </div>
     <script>
-        var dragSrc = document.getElementById('txt1')
+        var dragSrc = document.getElementById('tupian1')
         var target = document.getElementById('target')
 
         dragSrc.ondragstart = handle_start
@@ -63,7 +57,7 @@
         dragSrc.ondragend = handle_end
 
         function handle_start(e) {
-            e.dataTransfer.setData('Text', e.target.id)
+            e.dataTransfer.setData('Text', e.target.outerHTML)
             console.log('dragstart-在元素开始被拖动时候触发')
         }
 
@@ -72,6 +66,7 @@
         }
 
         function handle_end(e) {
+            e.target.parentNode.removeChild(e.target)
             console.log('dragend-在拖动操作完成时触发', e)
         }
 
@@ -107,9 +102,9 @@
             console.log('handle_drop-当元素在目的地放下时触发', e)
             e.target.style = 'border:1px solid none'
             let returnObj = e.dataTransfer.getData('Text')
-            let box = document.getElementById(returnObj)
-            console.log(box)
-            e.target.parentNode.insertBefore(box,e.target.nextElementSibling);
+            const div = document.createElement('div')
+            div.innerHTML = returnObj
+            e.target.parentNode.insertBefore(div,e.target.nextElementSibling);
             e.preventDefault()
         }
     </script>
