@@ -2,6 +2,7 @@
   <img alt="Vue logo" src="../assets/logo.png" />
   <div class="tips">
     {{ count }}
+    {{count*2}}
   </div>
 </template>
 

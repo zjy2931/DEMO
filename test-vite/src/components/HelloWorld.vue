@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <h1>{{ msg }}</h1>
     <button @click="inCrement">count is:</button>
     <p>{{ count }}</p>
@@ -43,4 +44,34 @@ export default defineComponent({
         };
     },
 });
+=======
+  <h1>{{ msg }}</h1>
+  <button @click="inCrement">count is:</button>
+  <p>{{ count }}</p>
+  <p class="d">{{count*3}}</p>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
+import { key } from '../store'
+
+export default defineComponent({
+  name: 'HelloWorld',
+  props: {
+    msg: {
+      type: String,
+      default: ''
+    }
+  },
+  setup() {
+    const store = useStore(key)
+    const count = computed(() => store.state.count)
+    return {
+      count,
+      inCrement: () => store.commit('increment')
+    }
+  }
+})
+>>>>>>> b8beb3766562a0c43f903ba03e16b2d11976237a
 </script>
