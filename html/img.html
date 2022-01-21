@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <title>Document</title>
+    <style>
+        #box{
+            /* width: 500px; */
+            position: relative;
+
+        }
+        img{
+            width: 100%;
+        }
+        .price{
+            position: absolute;
+            top: 293px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 200px;
+            font-weight: bolder;
+            color: #D9413C;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+       <img src="https://wm-front-common.oss-cn-beijing.aliyuncs.com/wm-front-landing-page-mobile-custom/assets/caishang/red_show.png" alt="" class="bg">
+       <div class="price">
+           5
+       </div>
+    </div>
+</body>
+<script>
+    const  div = document.getElementById('box')
+    domtoimage.toPng(div)
+    .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
+</script>
+</html>

@@ -16,10 +16,15 @@
         .tips {
             color: red;
         }
+        img{
+            width: 2000px;
+        }
     </style>
 </head>
 
 <body>
+    <img src="./img/1.svg" alt="" class="src">
+    <!-- <embed src="./img/test.svg" type="image/svg+xml" /> -->
     <textarea rows="25" class="text" placeholder="输入下单参数">
         {
             "bizNo": "BT13344159351966148632",
@@ -28,7 +33,7 @@
             "memberId": "1601187720000213212",
             "mchAppId": "wxe6ef0f974593b718",
             "payMethod": "WJS",
-            "requestId": "1013467007045765",
+            "requestId": "1013467007045764",
             "clientIp": "14.23.150.211",
             "os": "Android",
             "returnUrl": "",
@@ -43,11 +48,19 @@
     <button id="btn">下单</button>
 </body>
 <script>
+    //            <!-- "requestId": "1013467007045765", -->
+    const iframe = document.getElementById('test')
+    console.dir(iframe.contentWindow, "=============")
+    window.addEventListener("message", function (event) {
+        var data = event.data;
+        console.log(event, "==============")
+        //data.param == "121121" 、data.msg == "success";
+    })
     axios.defaults.headers.post['h-app-id'] = '144'
     document.querySelector('#btn').onclick = function () {
         const textE = document.querySelector('.text').value
-        const {appid,...params} = JSON.parse(textE)
-        axios.post('/api/pay/cashier/createTradeOrder', params,{headers:{'h-app-id':appid}})
+        const { appid, ...params } = JSON.parse(textE)
+        axios.post('/api/pay/cashier/createTradeOrder', params, { headers: { 'h-app-id': appid } })
             .then(function (response) {
                 console.log(response)
                 const { code, desc, data } = response.data

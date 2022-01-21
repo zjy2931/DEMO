@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
+        body {
             height: 300vh;
         }
     </style>
@@ -28,7 +28,7 @@
         onUpdated,
         onUnmounted
     } from 'https://unpkg.com/@vue/lit'
-    
+
     defineComponent('my-component', () => {
         const state = reactive({
             text: 'hello',
@@ -75,6 +75,17 @@
       <button @click=${increase}>increase</button>
     `
     })
+</script>
+
+<script>
+    //https://course1.cqslim.net/?targeturl=https%3A%2F%2Finfo.cqslim.net%2Fcustomer%2F%3Fappid%3Dchangqing-shoushen%26productSn%3DPRODUCT_SN_CQ_LIVE_7%23%2FChangqingCode#/questionnaire
+    function combineUrl(url, target) {
+        url = new URL(url)
+        url.searchParams.set('targeturl', target)
+        return url.toString()
+    }
+    const targetUrl = new URL(`https://test-info.cqslim.net/customer/?appid=changqing-shoushen&productSn=PRODUCT_SN_CQ_LIVE_7#/ChangqingCode`)
+    console.log(combineUrl('https://test-course.weimiaoshangxueyuan.top/#/questionnaire', targetUrl))
 </script>
 
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin="anonymous" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" src="https://lib.baomitu.com/jquery/3.6.0/jquery.js"></script>
+</head>
+<style>
+  body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    /* background-color: #ddd; */
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    width: 100px;
+    height:100px;
+   position: relative;
+  }
+  .cover,.back {
+    width: 100px;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all 1s ease-out;
+    font-size: 80px;;
+   
+   }
+   .cover {
+     transform: translateY(0deg);
+   }
+   .back{
+    transform: rotateY(-180deg);
+   }
+   .card .cover.active{
+    transform: rotateY(180deg);
+   }
+   .card .back.active{
+    transform: rotateY(0deg);
+   }
+</style>
+<body>
+  <div class="card">
+    <img src="https://wm-front-common.oss-cn-beijing.aliyuncs.com/wm-front-landing-page-mobile-custom/assets/caishang/reward/cover.png" class="cover " id="test"></img>
+    <img src="https://wm-front-common.oss-cn-beijing.aliyuncs.com/wm-front-landing-page-mobile-custom/assets/caishang/reward/reward_2.png" class="back "></img>
+  </div>
+</body>
+  <script>
+     $('.card').click(()=>{
+       $('.cover').addClass('active')
+       $('.back').addClass('active')
+     })
+  </script>
+</html>
